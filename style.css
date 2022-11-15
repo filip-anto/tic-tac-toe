@@ -5,12 +5,16 @@ h1 {
 .container {
     display: grid;
     grid-template-columns: 5rem 5rem 5rem;
+    grid-template-rows: 5rem 5rem 5rem;
     align-items: center;
     justify-content: center;
 }
 
 .container div {
-    padding: 2rem;
+    
+    text-align:center;
+    height:5rem;
+    width:5rem;
     border-style: solid;
     cursor: pointer;
 }
@@ -19,4 +23,12 @@ h1 {
     scale:1.1;
     transition:0.5s;
     z-index: 1;
+}
+
+.playerChoice:hover{
+    background-color: green;
+}
+
+.playerChoice{
+    background-color: green;
 }

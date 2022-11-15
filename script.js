@@ -25,7 +25,22 @@ gameBoard = (() => {
 
 
 gameLogic = (() => {
-    const checkValidity = (x_pos, y_pos) => gameBoard.getContent(x_pos, y_pos) === 0;
+    let rand = () => Math.ceil(3 * Math.random(0, 1))-1;
+    const calculateComputerMove = () => {
+        let flag = false;
+        let x_pos;
+        let y_pos;
+        do{
+        x_pos = rand();
+        y_pos = rand();
+        flag=checkValidity(x_pos, y_pos);
+    }while(flag==false);
+    gameBoard.setMove(x_pos,y_pos,computer_player);
+    }
+
+
+
+    const checkValidity = (x_pos, y_pos) =>(gameBoard.getContent(x_pos, y_pos)===0?true:false);
     const checkForTie = () => {
         let board = gameBoard.getBoard();
         for (i in board) {
@@ -65,8 +80,10 @@ gameLogic = (() => {
         (checkValidity(x_pos, y_pos) ? gameBoard.setMove(x_pos, y_pos, playerObject) : console.log("ERROR"));
         console.log(checkForTie() ? "TIE" : "Keep Going");
         console.log(checkForWin() ? "Win" : "Keep Going");
+        calculateComputerMove();
+
     }
-    return { setMove };
+    return { setMove, checkValidity };
 }
 )();
 
@@ -77,17 +94,19 @@ displayController = (() => {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 let gridItem = document.createElement("div");
-                gridItem.textContent = "";
+                gridItem.textContent = " ";
                 gridItem.classList.add("gridItem");
-                gridItem.addEventListener('click', (event) => getPlayerInput(i,j));
+                gridItem.addEventListener('click', (event) => getPlayerInput(event, i, j));
                 playingArea.appendChild(gridItem);
             }
         }
     }
 
 
-    const getPlayerInput=(i,j)=>{
-        
+    const getPlayerInput = (event, i, j) => {
+        gameLogic.setMove(i, j, human_player);
+        event.srcElement.innerHTML = (human_player.getSymbol());
+        event.srcElement.classList.add("playerChoice");
     }
     playingGrid();
 })();
