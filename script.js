@@ -70,6 +70,30 @@ gameLogic = (() => {
 }
 )();
 
+displayController = (() => {
+    const playingGrid = () => {
+        let playingArea = document.getElementsByClassName("container")[0];
+        playingArea.innerHTML = "";
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                let gridItem = document.createElement("div");
+                gridItem.textContent = "";
+                gridItem.classList.add("gridItem");
+                gridItem.addEventListener('click', (event) => getPlayerInput(i,j));
+                playingArea.appendChild(gridItem);
+            }
+        }
+    }
+
+
+    const getPlayerInput=(i,j)=>{
+        
+    }
+    playingGrid();
+})();
+
+
+
 human_player = playerFactory("Player 1", "x");
 computer_player = playerFactory("Player 2", "o");
 

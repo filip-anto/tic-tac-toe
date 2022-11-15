@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 5rem 5rem 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.container div {
+    padding: 2rem;
+    border-style: solid;
+    cursor: pointer;
+}
+.container div:hover{
+    background-color: beige;
+    scale:1.1;
+    transition:0.5s;
+    z-index: 1;
+}
