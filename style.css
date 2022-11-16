@@ -6,29 +6,32 @@ h1 {
     display: grid;
     grid-template-columns: 5rem 5rem 5rem;
     grid-template-rows: 5rem 5rem 5rem;
-    align-items: center;
     justify-content: center;
 }
 
 .container div {
-    
-    text-align:center;
-    height:5rem;
-    width:5rem;
+    text-align: center;
+    display: grid;
+    align-items: center;
     border-style: solid;
     cursor: pointer;
+    font-size: 4rem;
 }
-.container div:hover{
+
+.container div:hover {
     background-color: beige;
-    scale:1.1;
-    transition:0.5s;
+    scale: 1.1;
+    transition: 0.5s;
     z-index: 1;
 }
 
-.playerChoice:hover{
+.playerChoice:hover {
     background-color: green;
 }
 
-.playerChoice{
+.playerChoice {
     background-color: green;
+}
+.computerChoice{
+    background-color:blue;
 }
