@@ -92,14 +92,14 @@ gameLogic = (() => {
             tie = (checkForTie() ? true : false);
             game_end = (checkForWin() ? true : false);
             if (game_end === true) {
-                alert("Computer Won!");
+                createUI.displayWinner("AI");
                 gameBoard.gameBoardReset();
             }
         } else if (game_end === true) {
-            alert("Player Won!");
+            createUI.displayWinner("player");
             gameBoard.gameBoardReset();
         } else {
-            alert("Game Ended In tie!");
+            createUI.displayWinner("Tie");
             gameBoard.gameBoardReset();
         }
 
@@ -147,16 +147,102 @@ displayController = (() => {
 human_player = playerFactory("Player 1", "X");
 computer_player = playerFactory("Player 2", "O");
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementsByTagName("h2")[0].classList.add("loaded");
- }, false);
+let gameMode=0;
+let menu_status = 0;
 
- document.getElementsByTagName("h2")[0].addEventListener("transitionend",makeButtonsVisible);
- function makeButtonsVisible(){
+createUI=(()=>{
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementsByTagName("h2")[0].classList.add("loaded");
+    }, false);
+    
+    document.getElementById("positive").addEventListener("click", start_game);
+    document.getElementById("negative").addEventListener("click", start_game);
+    document.getElementsByTagName("h2")[0].addEventListener("transitionend", makeButtonsVisible);
+function makeButtonsVisible() {
+    
     document.getElementsByClassName("options")[0].style.visibility = "visible";
- }
+}
 
- document.getElementById("positive").addEventListener("click",start_game);
- function start_game(){
-    document.getElementsByClassName("options")[0].style.visibility = "hidden";
- }
+
+function start_game(e) {
+    if (menu_status === 0) {
+        chooseGameMode();
+    } else {
+        createFirstPlayer();
+        gameMode=1;
+        if (e.srcElement.id === "negative") {
+            createSecondPlayer();
+            gameMode=2;
+        }
+        setPlayerInputArea();
+
+    }
+}
+function chooseGameMode() {
+    document.getElementsByTagName("h2")[0].innerHTML = "Against A Computer Or Another Player?";
+    document.getElementsByTagName("button")[0].innerHTML = "Computer";
+    document.getElementsByTagName("button")[1].innerHTML = "Player";
+    menu_status = 1;
+}
+
+function createFirstPlayer() {
+    let player1Label = document.createElement("label");
+    player1Label.setAttribute("for", "player1TextField");
+    player1Label.textContent = "Enter Player 1 name";
+    let player1TextField = document.createElement("textArea");
+    player1TextField.setAttribute("id", "player1TextField");
+    document.getElementsByClassName("options")[0].appendChild(player1Label);
+    document.getElementsByClassName("options")[0].appendChild(player1TextField);
+}
+
+function createSecondPlayer() {
+    player2Label = document.createElement("label");
+    player2Label.setAttribute("for", "player2TextField");
+    player2Label.textContent = "Enter Player 2 name";
+    let player2TextField = document.createElement("textArea");
+    player2TextField.setAttribute("id", "player2TextField");
+    document.getElementsByClassName("options")[0].appendChild(player2Label);
+    document.getElementsByClassName("options")[0].appendChild(player2TextField);
+}
+
+function setPlayerInputArea() {
+    document.getElementsByTagName("button")[1].remove();
+    document.getElementsByTagName("button")[0].remove();
+    let submitInputButton = document.createElement("button");
+    submitInputButton.addEventListener('click',createPlayerUI);
+    submitInputButton.textContent = "Submit";
+    menu_status = 2;
+    document.getElementsByClassName("options")[0].appendChild(submitInputButton);
+}
+
+function createPlayerUI(){
+    if (gameMode==1){    
+        document.getElementsByTagName("h2")[0].textContent=(document.getElementsByTagName("textArea")[0].value)+"  vs  A.I.";
+        removePlayer1Input();
+    }else{
+        document.getElementsByTagName("h2")[0].textContent=(document.getElementsByTagName("textArea")[0].value)+"  vs  "+ (document.getElementsByTagName("textArea")[1].value);
+        removePlayer1Input();
+        removePlayer2Input();   
+    }
+    document.getElementsByClassName("container")[0].style.visibility = "visible";
+}
+function removePlayer1Input(){
+    document.getElementsByTagName("button")[0].removeEventListener('click',createPlayerUI);
+    document.getElementsByTagName("label")[0].remove();
+    document.getElementById("player1TextField").remove();
+    document.getElementsByTagName("button")[0].remove();
+}
+
+function removePlayer2Input(){
+    document.getElementsByTagName("label")[0].remove();
+    document.getElementById("player2TextField").remove();
+}
+function displayWinner($1){
+    if($1=="Tie"){
+        document.getElementsByTagName("h2")[0].textContent= "It is a "+$1;
+    }else{
+    document.getElementsByTagName("h2")[0].textContent= "Winner is "+$1;
+}
+}
+return{displayWinner};
+})();

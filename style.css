@@ -5,7 +5,7 @@ h2{
     text-align: center;
     scale:0.1;
     text-shadow: 3rem 2rem 5rem;
-    font-size:3rem;
+    font-size:2rem;
 }
 .loaded{
     scale:1.5;
@@ -13,25 +13,43 @@ h2{
 }
 .options{
     text-align:center;
+    align-items: center;
+    display:flex;
+    gap:2rem;
+    justify-content: center;
     padding-bottom:2rem;
     visibility: hidden;
 }
+textarea{
+    border: none;
+    height: 1.2rem;
+    font-size: 1.1rem;
+    width: 10rem;
+    resize: none;
+    background-color: lightblue;
+    border-style: solid;
+    border-radius: 3rem;
+    border-color: lightblue;
+    overflow: hidden;
+}
 button{
-    font-size:1.5rem;
-    width:8rem;
+    font-size:1.2rem;
+    width:10rem;
     background-color: rgb(9, 252, 9);
     border-radius: 1rem;
     border-color: rgb(9, 252, 9);
     padding-left:2rem;
     padding-right:2rem;
     margin:1rem;
+    text-align: center;
 }
 button:hover{
     scale:1.1;
-    transition:0.5s;
+    transition:0.1s;
     text-shadow: 2rem;
 }
 .container {
+    visibility: hidden;
     display: grid;
     grid-template-columns: 5rem 5rem 5rem;
     grid-template-rows: 5rem 5rem 5rem;
