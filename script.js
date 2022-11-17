@@ -91,6 +91,10 @@ gameLogic = (() => {
             calculateComputerMove();
             tie = (checkForTie() ? true : false);
             game_end = (checkForWin() ? true : false);
+            if (game_end === true) {
+                alert("Computer Won!");
+                gameBoard.gameBoardReset();
+            }
         } else if (game_end === true) {
             alert("Player Won!");
             gameBoard.gameBoardReset();
@@ -142,3 +146,17 @@ displayController = (() => {
 
 human_player = playerFactory("Player 1", "X");
 computer_player = playerFactory("Player 2", "O");
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementsByTagName("h2")[0].classList.add("loaded");
+ }, false);
+
+ document.getElementsByTagName("h2")[0].addEventListener("transitionend",makeButtonsVisible);
+ function makeButtonsVisible(){
+    document.getElementsByClassName("options")[0].style.visibility = "visible";
+ }
+
+ document.getElementById("positive").addEventListener("click",start_game);
+ function start_game(){
+    document.getElementsByClassName("options")[0].style.visibility = "hidden";
+ }

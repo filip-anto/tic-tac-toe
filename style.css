@@ -1,7 +1,36 @@
 h1 {
     text-align: center;
 }
-
+h2{
+    text-align: center;
+    scale:0.1;
+    text-shadow: 3rem 2rem 5rem;
+    font-size:3rem;
+}
+.loaded{
+    scale:1.5;
+    transition:2s;
+}
+.options{
+    text-align:center;
+    padding-bottom:2rem;
+    visibility: hidden;
+}
+button{
+    font-size:1.5rem;
+    width:8rem;
+    background-color: rgb(9, 252, 9);
+    border-radius: 1rem;
+    border-color: rgb(9, 252, 9);
+    padding-left:2rem;
+    padding-right:2rem;
+    margin:1rem;
+}
+button:hover{
+    scale:1.1;
+    transition:0.5s;
+    text-shadow: 2rem;
+}
 .container {
     display: grid;
     grid-template-columns: 5rem 5rem 5rem;
@@ -21,7 +50,8 @@ h1 {
 .container div:hover {
     background-color: beige;
     scale: 1.1;
-    transition: 0.5s;
+    transition: 0.1s;
+    opacity:0.8;
     z-index: 1;
 }
 
